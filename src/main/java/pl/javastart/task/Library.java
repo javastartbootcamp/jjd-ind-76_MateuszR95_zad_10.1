@@ -1,18 +1,12 @@
 package pl.javastart.task;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Library {
 
-    private Book[] books;
-    private int booksCounter = 0;
-
-    public Library() {
-        books = new Book[3];
-    }
-
-    public void addBook() {
+    public Book[] createBookArray() {
+        Book[] books = new Book[3];
+        int booksCounter = 0;
         System.out.println("Podaj informacje o trzech unikalnych książkach");
         while (booksCounter < books.length) {
             Book book = createBook();
@@ -23,6 +17,7 @@ public class Library {
                 booksCounter++;
             }
         }
+        return books;
     }
 
     private Book createBook() {
@@ -37,16 +32,15 @@ public class Library {
     }
 
     private boolean isDuplicate(Book[] books, Book book) {
-        for (int i = 0; i < booksCounter; i++) {
-            if (books[i].equals(book)) {
+        for (Book value : books) {
+            if (value != null && value.equals(book)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void printBooks() {
-        addBook();
+    public void printBooks(Book[] books) {
         for (Book book : books) {
             System.out.println(book.toString());
         }
